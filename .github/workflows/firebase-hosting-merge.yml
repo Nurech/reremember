@@ -18,3 +18,9 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REREMEMBER_955F5 }}'
           channelId: live
           projectId: reremember-955f5
+          apiKey: '${{ secrets.APIKEY }}'
+          authDomain: '${{ secrets.AUTHDOMAIN }}'
+          storageBucket: '${{ secrets.SORAGEBUCKET }}'
+          messagingSenderId: '${{ secrets.MESSAGINGSENDERID }}'
+          appId: '${{ secrets.APPID }}'
+          measurementId: '${{ secrets.MEASUREMENTID }}'
