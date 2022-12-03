@@ -7,10 +7,11 @@ import { MaterialModule } from './modules/material.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './modules/app-routing.module';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StoreModule } from '@ngrx/store';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { StoreModule } from '@ngrx/store';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    NgxTypedJsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
