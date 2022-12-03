@@ -1,13 +1,35 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Mono+One&display=swap');
 
 html, body {
   height: 100%;
+  color: white;
 }
 
 body {
   background: #1A2238;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mono-font {
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+.anton-font {
+  font-family: 'Anton', sans-serif;
+}
+
+.typed-cursor {
+  color: white !important;
+}
+
+.scale-200 {
+  scale: 2;
 }

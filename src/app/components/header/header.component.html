@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <div class="row w-100">
+
+    <div class="col">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="navigate('/home')">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </button>
+          <button mat-menu-item (click)="navigate('/learn')">
+            <mat-icon>school</mat-icon>
+            <span>Learn</span>
+          </button>
+          <button mat-menu-item (click)="navigate('/train')" disabled>
+            <mat-icon>fitness_center</mat-icon>
+            <span>Train</span>
+          </button>
+          <button mat-menu-item (click)="navigate('/stats')" disabled>
+            <mat-icon>query_stats</mat-icon>
+            <span>Statistics</span>
+          </button>
+        </mat-menu>
+      </button>
+    </div>
+
+    <div class="col justify-content-end align-items-center d-flex">
+      <mat-chip-list>
+        <mat-chip color="primary">
+           0 points&nbsp;   <mat-icon>hub</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+    </div>
+  </div>
+
+
+</mat-toolbar>
