@@ -16,4 +16,8 @@ export class HeaderComponent implements OnInit {
   navigate(s: string) {
     this.router.navigate([s]);
   }
+
+  clickClearCache() {
+
+  }
 }

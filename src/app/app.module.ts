@@ -18,6 +18,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgxTypedJsModule } from 'ngx-typed-js';
+import { StatsComponent } from './components/stats/stats.component';
+import { TrainComponent } from './components/train/train.component';
+import { LearnComponent } from './components/learn/learn.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { ResultsComponent } from './components/results/results.component';
+import { BarComponent } from './components/charts/bar/bar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,6 +33,12 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
     HomeComponent,
     PageNotFoundComponent,
     HeaderComponent,
+    StatsComponent,
+    TrainComponent,
+    LearnComponent,
+    ResultsComponent,
+    BarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +53,11 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
     MatMenuModule,
     MatChipsModule,
     MatDividerModule,
-    NgxTypedJsModule
+    NgxTypedJsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

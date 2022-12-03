@@ -28,8 +28,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .typed-cursor {
   color: white !important;
+  font-size: 2.25rem !important;
 }
 
 .scale-200 {
   scale: 2;
+}
+
+.toast-container .ngx-toastr {
+  box-shadow: 0 0 12px #2d2d2d !important;
+}
+
+
+.toast-top-center {
+  top: 70px !important;
 }

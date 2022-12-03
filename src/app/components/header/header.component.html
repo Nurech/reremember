@@ -19,9 +19,17 @@
             <mat-icon>fitness_center</mat-icon>
             <span>Train</span>
           </button>
+          <button mat-menu-item (click)="navigate('/train')" disabled>
+            <mat-icon>scoreboard</mat-icon>
+            <span>Results</span>
+          </button>
           <button mat-menu-item (click)="navigate('/stats')">
-            <mat-icon>query_stats</mat-icon>
+            <mat-icon>diversity_1</mat-icon>
             <span>Statistics</span>
+          </button>
+          <button mat-menu-item (click)="clickClearCache()">
+            <mat-icon>delete</mat-icon>
+            <span>Clear cache</span>
           </button>
         </mat-menu>
       </button>
