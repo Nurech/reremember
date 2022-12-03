@@ -10,8 +10,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StoreModule } from '@ngrx/store';
-import { NgxTypedJsModule } from 'ngx-typed-js';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,6 +17,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 
 @NgModule({
   declarations: [
@@ -34,14 +33,13 @@ import { MatDividerModule } from '@angular/material/divider';
     provideFirestore(() => getFirestore()),
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
-    NgxTypedJsModule,
-    NgbModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
     MatChipsModule,
-    MatDividerModule
+    MatDividerModule,
+    NgxTypedJsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
