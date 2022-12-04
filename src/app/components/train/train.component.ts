@@ -13,3 +13,8 @@ export class TrainComponent implements OnInit {
   }
 
 }
+
+export const trainMap = [
+  {id: 0},
+  {id: 1, items: []}
+];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,12 @@ export class HeaderComponent implements OnInit {
   }
 
   navigate(s: string) {
-    this.router.navigate([s]);
+    if (s === '/learn') {
+      this.userService.clickOnMenuLearn();
+    }else if (s === '/stats') {
+      this.userService.clickOnMenuStatistics();
+    } else {
+      this.router.navigate([s])
+    }
   }
 }

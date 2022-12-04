@@ -21,7 +21,18 @@ export const itemModifiedInDb = createAction(
   props<{payload: Item}>()
 );
 
-export const getItemFromDb = createAction(
+export const getItemsFromDb = createAction(
   '[Item] get item from db',
   props<{payload: string}>()
+);
+
+
+export const getItemsFromDbSuccess = createAction(
+  '[Item] get items from db success',
+  props<{payload: Item}>()
+);
+
+export const getItemsFromDbFailure = createAction(
+  '[Item] get items from db failure',
+  props<{error: Error}>()
 );

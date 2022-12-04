@@ -1,6 +1,27 @@
 <div class="container">
+  <div class="row d-flex justify-content-center align-items-center flex-row">
+    <div [style.background-color]="i === userService.currentIndex ? '#c2185b': ''" class="number-badge m-2" *ngFor="let n of
+    numSequence(userService.maxIndex+1);
+           let i = index;">{{i}}</div>
+  </div>
   <div class="row d-flex justify-content-between p-2 align-items-center">
-    <button mat-raised-button color="primary" class="nav-button">Primary</button>
-    <button mat-raised-button color="primary" class="nav-button">Primary</button>
+    <div class="col d-flex justify-content-start">
+      <button mat-raised-button color="primary" class="nav-button" (click)="userService.prevPage()"
+              *ngIf="userService.currentIndex !== 0">Back
+      </button>
+
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button mat-raised-button [color]="this.userService.maxIndex === this.userService.currentIndex ? 'warn' : 'primary'"
+              class="nav-button"
+              (click)="userService.nextPage()"
+              [disabled]="userService.maxIndex === userService.currentIndex && this.userService.currentPage !== 'learn'"
+              [routerLink]="getRouterLink()">
+        <ng-container *ngIf="userService.currentIndex === 0">Start!</ng-container>
+        <ng-container *ngIf="userService.currentIndex !== 0 && userService.maxIndex !== userService.currentIndex">Next</ng-container>
+        <ng-container *ngIf="userService.maxIndex === userService.currentIndex">{{getEndButtonTxt()}}</ng-container>
+      </button>
+    </div>
+
   </div>
 </div>

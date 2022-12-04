@@ -1,4 +1,4 @@
-import { HostListener, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { LocalforageService } from './localforage.service';
 import { DataService } from './data.service';
 import { Common, Item, Learn, Train } from '../ngrx/models/item.model';
@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../components/modal/modal.component';
 import { ToastService } from './toast.service';
 import { Router } from '@angular/router';
+import { learnMap } from '../components/learn/learn.component';
+import { trainMap } from '../components/train/train.component';
+import { ngDebounce } from '../utils/debounce';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,11 @@ export class UserService {
   userItem: Item = {} as Item;
   userDocSnap: any;
   docRef: any;
+  currentIndex: number = 0;
+  maxIndex: number = 0;
+  currentPage: string = '';
+
+  docId = '';
 
   constructor(private localforageService: LocalforageService,
               private dataService: DataService,
@@ -23,22 +31,17 @@ export class UserService {
               private router: Router,
               public dialog: MatDialog) {
     this.getStorageData();
-
   }
 
+
   getStorageData() {
-    this.localforageService.getItem('userData43251351534').then(r => {
-      console.warn('user data from cache', r);
-      if (r === null) {
-        // No user data, create Item for new user
-        this.createItem();
+    this.localforageService.getItem('userData43251351534').then(docId => {
+      console.warn('user docId from storage', docId);
+      if (docId === null) {
+        this.createItem(); // No user data, create Item for new user
       } else {
-        this.userItem = r as Item;
-        if (this.userItem.id) {
-          this.getItem(this.userItem.id);
-        } else {
-          this.createItem();
-        }
+        this.docId = docId as string;
+        this.getItem(this.docId);
       }
     });
   }
@@ -47,8 +50,8 @@ export class UserService {
     this.docRef = await this.dataService.getDocRef(id);
     return this.dataService.getDoc(this.docRef).then(item => {
       this.userDocSnap = item;
-      console.warn('item from db: ', item);
       this.userItem = item.data() as Item;
+      console.warn('item from db: ', item);
     });
   }
 
@@ -59,21 +62,26 @@ export class UserService {
     this.userItem.common.points = 0;
     this.userItem.train = {} as Train;
     this.userItem.train.points = 0;
+    this.userItem.train.atPage = 0;
+    this.userItem.train.readPages = [];
     this.userItem.learn = {} as Learn;
     this.userItem.learn.points = 0;
+    this.userItem.learn.atPage = 0;
+    this.userItem.learn.readPages = [];
 
     this.dataService.addDoc(this.userItem).then((item) => {
       this.docRef = item as any;
-      this.userItem.id = item.id;
+      this.docId = item.id;
       console.warn('this.docRef', this.docRef);
       this.set();
     });
   }
 
   set() {
-    this.localforageService.set('userData43251351534', this.userItem);
+    this.localforageService.set('userData43251351534', this.docId);
   }
 
+  @ngDebounce(2000)
   update() {
     console.warn('this.userItem', this.userItem);
     this.dataService.updateDoc(this.docRef, this.userItem).then(r => console.log('update ok'));
@@ -92,7 +100,7 @@ export class UserService {
   clickClearCache() {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
-      data: {type: 'cache', username:this.userItem.name}
+      data: {type: 'cache', username: this.userItem.name}
     });
     dialogRef.afterClosed().subscribe(data => {
       console.log('The dialog was closed');
@@ -123,7 +131,7 @@ export class UserService {
   editUserName(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
-      data: {type: 'dialog', username:this.userItem.name}
+      data: {type: 'dialog', username: this.userItem.name}
     });
     dialogRef.afterClosed().subscribe(data => {
       console.log('The dialog was closed');
@@ -140,7 +148,7 @@ export class UserService {
   }
 
   getTotalUserPoints() {
-    return this.userItem.common?.points + this.userItem.train?.points + this.userItem.learn?.points;
+    return this.userItem?.common?.points + this.userItem?.train?.points + this.userItem?.learn?.points;
   }
 
   clickOnMenuLearn() {
@@ -153,8 +161,69 @@ export class UserService {
     this.router.navigate(['learn']);
   }
 
+  clickOnMenuStatistics() {
+    if (!this.userItem.learn.clickedOpen) {
+      this.userItem.learn.clickedOpen = true;
+      this.userItem.learn.points += 5;
+      this.notify('Yay! You earned 5 pts for taking an interest in statistics', 'success');
+      this.update();
+    }
+    this.router.navigate(['stats']);
+  }
+
   isShowFooter() {
-    console.warn(this.router.url)
+    if (this.router.url.includes('learn')) {
+      this.maxIndex = learnMap.length - 1;
+      this.currentPage = 'learn';
+      this.currentIndex = this.userItem?.learn?.atPage;
+    } else if (this.router.url.includes('train')) {
+      this.maxIndex = trainMap.length - 1;
+      this.currentPage = 'train';
+      this.currentIndex = this.userItem?.train?.atPage;
+    } else {
+      this.currentPage = '';
+    }
     return this.router.url.includes('learn') || this.router.url.includes('train');
   }
+
+  givePagePoint() {
+    let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
+    if (!item.readPages?.includes(this.currentIndex)) {
+      item.readPages?.push(this.currentIndex);
+      item.points += 5;
+      this.notify('Yay! You earned 10 pts for ' + this.currentPage + 'ing', 'success');
+      this.update();
+    }
+  }
+
+  nextPage() {
+    let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
+    let currIndex = item.atPage;
+    if (currIndex + 1 <= learnMap.length - 1) {
+      if (currIndex + 1 === learnMap.length - 1) {
+        console.warn('user reached the end');
+        item.isDone = true;
+      }
+      this.givePagePoint();
+      this.update();
+      item.atPage += 1;
+    } else {
+      return;
+    }
+
+  }
+
+  prevPage() {
+    let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
+    let currIndex = item.atPage;
+    console.warn(item);
+    console.warn(currIndex);
+    if (currIndex - 1 >= 0) {
+      item.atPage -= 1;
+      this.update();
+    } else {
+      return;
+    }
+  }
+
 }

@@ -4,13 +4,13 @@
 export interface Item {
   id: string;
   name: string;
-  common: Common ;
+  common: Common;
   learn: Learn;
   train: Train;
 }
 
 export interface Common {
-  points: number
+  points: number;
   readHomePage: boolean;
   editUserName: boolean;
   clickedPoints: boolean;
@@ -18,12 +18,16 @@ export interface Common {
 
 export interface Learn {
   isDone: boolean;
-  points: number
+  points: number;
   clickedOpen: boolean;
+  atPage: number;
+  readPages: number[];
 }
 
 export interface Train {
   isDone: boolean;
-  points: number
+  points: number;
   clickedOpen: boolean;
+  atPage: number;
+  readPages: number[];
 }

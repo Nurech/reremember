@@ -45,6 +45,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .nav-button {
-  max-width: 30%;
+  max-width: 70%;
   height: 60px;
+  width: 100%;
+}
+
+
+.number-badge {
+  width: min-content;
+  background: darkslategray;
+  border-radius: 5px;
 }

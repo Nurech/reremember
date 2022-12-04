@@ -5,8 +5,7 @@ import { DataService } from '../../services/data.service';
 import { ToastService } from '../../services/toast.service';
 import { LocalforageService } from '../../services/localforage.service';
 import { IRootState } from '../root-store/IRootState';
-import { getItemFromDb } from './items.actions';
-import { exhaustMap, switchMap } from 'rxjs';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Injectable()
 export class ItemsEffects {
@@ -16,9 +15,8 @@ export class ItemsEffects {
     private store$: Store<IRootState>,
     private dataService: DataService,
     private toastService: ToastService,
-    private localforageService: LocalforageService
+    private localforageService: LocalforageService,
+    private subService: SubscriptionService
   ) {}
-
-
 
 }
