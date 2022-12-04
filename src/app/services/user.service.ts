@@ -6,6 +6,7 @@ import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../components/modal/modal.component';
 import { ToastService } from './toast.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class UserService {
   constructor(private localforageService: LocalforageService,
               private dataService: DataService,
               private toastService: ToastService,
+              private router: Router,
               public dialog: MatDialog) {
     this.getStorageData();
 
@@ -104,14 +106,12 @@ export class UserService {
   }
 
   clickOnPoints() {
-    if (this.userItem.common.clickedPoints) {
-      return;
+    if (!this.userItem.common.clickedPoints) {
+      this.userItem.common.clickedPoints = true;
+      this.userItem.common.points += 5;
+      this.notify('Yay! You earned 5pts for trying to click stuff', 'success');
+      this.update();
     }
-
-    this.userItem.common.clickedPoints = true;
-    this.userItem.common.points += 5;
-    this.notify('Yay! You earned 5pts for trying to click stuff', 'success');
-    this.update();
   }
 
   notify(message: string, type: 'success') {
@@ -140,6 +140,21 @@ export class UserService {
   }
 
   getTotalUserPoints() {
-    return this.userItem.common.points + this.userItem.train.points + this.userItem.learn.points;
+    return this.userItem.common?.points + this.userItem.train?.points + this.userItem.learn?.points;
+  }
+
+  clickOnMenuLearn() {
+    if (!this.userItem.learn.clickedOpen) {
+      this.userItem.learn.clickedOpen = true;
+      this.userItem.learn.points += 5;
+      this.notify('Yay! You earned 10 pts for starting to learn things', 'success');
+      this.update();
+    }
+    this.router.navigate(['learn']);
+  }
+
+  isShowFooter() {
+    console.warn(this.router.url)
+    return this.router.url.includes('learn') || this.router.url.includes('train');
   }
 }

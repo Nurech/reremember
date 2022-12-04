@@ -43,3 +43,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .toast-top-center {
   top: 70px !important;
 }
+
+.nav-button {
+  max-width: 30%;
+  height: 60px;
+}

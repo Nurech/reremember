@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { ToastService } from '../../services/toast.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +8,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private dataService: DataService, private toastService: ToastService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit() {
   }

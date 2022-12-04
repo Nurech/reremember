@@ -12,19 +12,18 @@ export interface Item {
 export interface Common {
   points: number
   readHomePage: boolean;
-  openUserNameModal: boolean;
   editUserName: boolean;
   clickedPoints: boolean;
-  clickedMenu: boolean;
-  clickedStatistics: boolean;
 }
 
 export interface Learn {
+  isDone: boolean;
   points: number
-  opened: boolean;
+  clickedOpen: boolean;
 }
 
 export interface Train {
+  isDone: boolean;
   points: number
-  opened: boolean;
+  clickedOpen: boolean;
 }

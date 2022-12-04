@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { slideInAnimation } from './animations/animations';
 import { Store } from '@ngrx/store';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { Store } from '@ngrx/store';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private contexts: ChildrenOutletContexts, private store$: Store) {}
+  constructor(private contexts: ChildrenOutletContexts, public userService: UserService) {}
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
