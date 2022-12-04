@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { DataService } from '../../services/data.service';
 import { ToastService } from '../../services/toast.service';
 import { LocalforageService } from '../../services/localforage.service';
-import { IRootState } from '../IRootState';
+import { IRootState } from '../root-store/IRootState';
 
 @Injectable()
 export class ItemsEffects {

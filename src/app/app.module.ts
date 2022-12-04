@@ -27,7 +27,7 @@ import { BarComponent } from './components/charts/bar/bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
-import { metaReducers, reducers } from './ngrx/IRootState';
+import { metaReducers, reducers } from './ngrx/root-store/IRootState';
 
 @NgModule({
   declarations: [
