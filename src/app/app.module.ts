@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -26,6 +26,8 @@ import { ResultsComponent } from './components/results/results.component';
 import { BarComponent } from './components/charts/bar/bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
+import { EffectsModule } from '@ngrx/effects';
+import { metaReducers, reducers } from './ngrx/IRootState';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
     LearnComponent,
     ResultsComponent,
     BarComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +60,11 @@ import { ToastrModule } from 'ngx-toastr';
       echarts: () => import('echarts')
     }),
     ToastrModule.forRoot(),
+    StoreModule.forRoot(reducers, {metaReducers}),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
