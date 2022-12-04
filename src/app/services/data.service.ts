@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot, query } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, query, addDoc, updateDoc, getDoc, doc } from '@angular/fire/firestore';
 import { LocalforageService } from './localforage.service';
 import { Store } from '@ngrx/store';
 import { ItemActions } from '../ngrx/items-store';
@@ -16,6 +16,7 @@ export class DataService {
   }
 
   startListeningDb() {
+
     const q = query(collection(this.db, 'items'));
     onSnapshot(q, (snapshot) => {
       console.warn(snapshot);
@@ -38,11 +39,20 @@ export class DataService {
     });
   }
 
-  getItems() {
+  addDoc(item: Item) {
+    return addDoc(collection(this.db, 'items'), item);
   }
 
-  clearCache() {
-    this.localforageService.DELETE_ALL();
-    console.log('Cache cleared!');
+  updateDoc(docRef: any, item: Item) {
+    return updateDoc(docRef, item);
   }
+
+  getDoc(dockRef: any) {
+    return getDoc(dockRef);
+  }
+
+  getDocRef(id: string) {
+    return doc(this.db, 'items', id);
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -8,16 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public userService: UserService) { }
 
   ngOnInit(): void {
   }
 
   navigate(s: string) {
     this.router.navigate([s]);
-  }
-
-  clickClearCache() {
-
   }
 }

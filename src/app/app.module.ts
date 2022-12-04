@@ -28,6 +28,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
 import { metaReducers, reducers } from './ngrx/root-store/IRootState';
+import { ModalComponent } from './components/modal/modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,8 @@ import { metaReducers, reducers } from './ngrx/root-store/IRootState';
     LearnComponent,
     ResultsComponent,
     BarComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,11 @@ import { metaReducers, reducers } from './ngrx/root-store/IRootState';
     }),
     ToastrModule.forRoot(),
     StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,8 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(private dataService: DataService, private toastService: ToastService) {}
 
   ngOnInit() {
-    this.dataService.getItems()
-    this.toastService.showSuccess();
   }
 
 

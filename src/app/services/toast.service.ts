@@ -8,8 +8,8 @@ export class ToastService {
 
   constructor(private toastr: ToastrService) {}
 
-  showSuccess() {
-    this.toastr.success('5 points for reading home page!', '',{
+  showSuccess(message: string) {
+    this.toastr.success(message, '', {
       timeOut: 4000, closeButton: true, positionClass: 'toast-top-center', progressBar: true
     });
   }

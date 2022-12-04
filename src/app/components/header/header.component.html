@@ -1,7 +1,7 @@
 <mat-toolbar>
   <div class="row w-100">
 
-    <div class="col">
+    <div class="col d-flex align-items-center">
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>menu</mat-icon>
@@ -13,32 +13,38 @@
           </button>
           <button mat-menu-item (click)="navigate('/learn')">
             <mat-icon>school</mat-icon>
-            <span>Learn</span>
+            <span>Your learning</span>
           </button>
-          <button mat-menu-item (click)="navigate('/train')">
+          <button mat-menu-item (click)="navigate('/train')" disabled>
             <mat-icon>fitness_center</mat-icon>
-            <span>Train</span>
+            <span>Your training*</span>
           </button>
           <button mat-menu-item (click)="navigate('/train')" disabled>
             <mat-icon>scoreboard</mat-icon>
-            <span>Your results</span>
+            <span>Your results*</span>
           </button>
           <button mat-menu-item (click)="navigate('/stats')">
             <mat-icon>diversity_1</mat-icon>
             <span>Statistics</span>
           </button>
-          <button mat-menu-item (click)="clickClearCache()">
+          <button mat-menu-item (click)="userService.clickClearCache()">
             <mat-icon>delete</mat-icon>
             <span>Clear cache</span>
           </button>
         </mat-menu>
       </button>
+      <div class="text-sm">
+        {{userService?.userItem?.name}}
+      </div>
+      <button mat-icon-button (click)="userService.editUserName()">
+        <mat-icon [color]="'primary'">edit</mat-icon>
+      </button>
     </div>
 
     <div class="col justify-content-end align-items-center d-flex">
       <mat-chip-list>
-        <mat-chip color="primary">
-          0 points&nbsp;
+        <mat-chip color="primary" (click)="userService.clickOnPoints()">
+          {{userService.getTotalUserPoints()}} points&nbsp;
           <mat-icon>hub</mat-icon>
         </mat-chip>
       </mat-chip-list>

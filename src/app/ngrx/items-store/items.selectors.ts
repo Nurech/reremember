@@ -1,11 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { itemsFeatureKey } from './items.state';
-import { Item } from '../models/item.model';
-export const selectAppState = createFeatureSelector<Item>(
+import { itemsFeatureKey, ItemsState } from './items.state';
+export const selectAppState = createFeatureSelector<ItemsState>(
   itemsFeatureKey
 );
 
-export const selectCurrentState = createSelector(
+export const selectAllItems = createSelector(
   selectAppState,
-  state => state
+  state => state.entities
 );

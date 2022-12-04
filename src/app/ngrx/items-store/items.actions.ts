@@ -20,3 +20,8 @@ export const itemModifiedInDb = createAction(
   '[Item] item modified from db',
   props<{payload: Item}>()
 );
+
+export const getItemFromDb = createAction(
+  '[Item] get item from db',
+  props<{payload: string}>()
+);
