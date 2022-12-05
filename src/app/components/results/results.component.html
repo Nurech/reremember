@@ -1,20 +1,30 @@
-<div class="container h-100">
+<div class="container h-100 mb-5">
 
   <ng-container *ngIf="userService.isResultsOpen(); else Nope">
 
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm-6">
         <app-chart [type]="'points'" [compareSelf]="true"></app-chart>
       </div>
-      <div class="col-sm">
-        One of three columns
+      <div class="col-sm-6">
+        <app-chart [type]="'mindmap'" [compareSelf]="true"></app-chart>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <app-chart [type]="'squares'" [compareSelf]="true"></app-chart>
+      </div>
+      <div class="col-sm-6">
+        <app-chart [type]="'function'" [compareSelf]="true"></app-chart>
       </div>
     </div>
 
   </ng-container>
 
   <ng-template #Nope>
-    <div class="w-100 h-100 text-center d-flex justify-content-center align-items-center p-5 text-2xl text-white justify-center text-center anton-font">
+    <div
+      class="w-100 h-100 text-center d-flex justify-content-center align-items-center p-5 text-2xl text-white justify-center text-center anton-font">
       You can see stats after completing your learning and training ;)
     </div>
   </ng-template>

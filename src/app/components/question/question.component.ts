@@ -1,7 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { trainMap } from '../train/train.component';
-import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-question',
@@ -48,7 +46,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     }
 
     // @ts-ignore
-    this.userService.userItem.result[target] = this.data.label + ' - ' + this.data.for + ' - ' + this.data.q;
+    this.userService.userItem.result[target] = this.data.q;
     // @ts-ignore
     this.userService.userItem.result[target + 'Score'] = this.value.toString();
     this.checkDisableStatus();

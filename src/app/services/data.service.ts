@@ -4,6 +4,7 @@ import { LocalforageService } from './localforage.service';
 import { Store } from '@ngrx/store';
 import { ItemActions } from '../ngrx/items-store';
 import { Item } from '../ngrx/models/item.model';
+import { itemModifiedInDb } from '../ngrx/items-store/items.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class DataService {
         }
         if (change.type === 'modified') {
           console.log('Modified item: ', change.doc.data());
+          this.store$.dispatch(ItemActions.itemModifiedInDb({payload: item}));
         }
         if (change.type === 'removed') {
           console.log('Removed item: ', item);

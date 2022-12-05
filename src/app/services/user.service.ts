@@ -165,7 +165,6 @@ export class UserService {
 
   isShowFooter() {
     let currentUrl = this.router.url;
-    console.warn(['home', 'stats', 'results'].includes(currentUrl.replace(/[^a-zA-Z0-9 ]/g, '')))
     return !['home', 'stats', 'results'].includes(currentUrl.replace(/[^a-zA-Z0-9 ]/g, ''));
   }
 
