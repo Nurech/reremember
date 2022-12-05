@@ -89,12 +89,12 @@ and has the target letter as the next consonant, e.g., aqua.`
       },
       {
         type: 'table',
-        cols: ['position', 'word1', 'word2'],
+        cols: ['word1', 'word2'],
         tableData: [
-          {position: 1, word1: 'calculation', word2: 'jest'},
-          {position: 2, word1: 'bland', word2: 'bench'},
-          {position: 3, word1: 'neglect', word2: 'alarm'},
-          {position: 4, word1: 'compliance', word2: 'division'}
+          {word1: 'calculation', word2: 'jest'},
+          {word1: 'bland', word2: 'bench'},
+          {word1: 'neglect', word2: 'alarm'},
+          {word1: 'compliance', word2: 'division'}
         ]
       },
       {
@@ -112,12 +112,12 @@ and has the target letter as the next consonant, e.g., aqua.`
       },
       {
         type: 'table',
-        cols: ['position', 'word1', 'word2'],
+        cols: ['word1', 'word2'],
         tableData: [
-          {position: 1, word1: 'calculation', word2: 'jest'},
-          {position: 2, word1: 'bland', word2: 'bench'},
-          {position: 3, word1: 'neglect', word2: 'alarm'},
-          {position: 4, word1: 'compliance', word2: 'division'}
+          {word1: 'calculation', word2: 'jest'},
+          {word1: 'bland', word2: 'bench'},
+          {word1: 'neglect', word2: 'alarm'},
+          {word1: 'compliance', word2: 'division'}
         ]
       },
       {
@@ -144,7 +144,7 @@ and has the target letter as the next consonant, e.g., aqua.`
           label: 'mindmap',
           q: 'Do you think this will produce secure passwords?',
           for: 'Q2',
-          title: 'MINDMAP METHOD'
+          title: ''
         }
       },
       {
@@ -153,7 +153,7 @@ and has the target letter as the next consonant, e.g., aqua.`
           label: 'mindmap',
           q: 'How easy is it to produce passwords with this method?',
           for: 'Q3',
-          title: 'MINDMAP METHOD'
+          title: ''
         }
       }
     ]
@@ -232,7 +232,7 @@ C = (I0, . . . , I13) would correspond to an ordered subset of those images.`
           label: 'squares',
           q: 'Would you use this in practical world?',
           for: 'Q1',
-          title: 'PUBLIC CHALLENGE METHOD'
+          title: 'CHALLENGE METHOD'
         }
       },
       {
@@ -241,7 +241,7 @@ C = (I0, . . . , I13) would correspond to an ordered subset of those images.`
           label: 'squares',
           q: 'Do you think this will produce secure passwords?',
           for: 'Q2',
-          title: 'PUBLIC CHALLENGE METHOD'
+          title: ''
         }
       },
       {
@@ -250,7 +250,7 @@ C = (I0, . . . , I13) would correspond to an ordered subset of those images.`
           label: 'squares',
           q: 'How easy is it to produce passwords with this method?',
           for: 'Q3',
-          title: 'PUBLIC CHALLENGE METHOD'
+          title: ''
         }
       }
     ]
@@ -325,16 +325,15 @@ quires first retrieving A and then applying f.`
           label: 'function',
           q: 'Would you use this in practical world?',
           for: 'Q1',
-          title: 'CREATION SCHEMA METHOD'
+          title: 'SCHEMA METHOD'
         }
-      },
-      {
+      },      {
         type: 'question',
         data: {
           label: 'function',
           q: 'Do you think this will produce secure passwords?',
           for: 'Q2',
-          title: 'CREATION SCHEMA METHOD'
+          title: ''
         }
       },
       {
@@ -343,7 +342,7 @@ quires first retrieving A and then applying f.`
           label: 'function',
           q: 'How easy is it to produce passwords with this method?',
           for: 'Q3',
-          title: 'CREATION SCHEMA METHOD'
+          title: ''
         }
       }
     ]

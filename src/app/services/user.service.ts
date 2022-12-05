@@ -170,10 +170,11 @@ export class UserService {
 
   givePagePoint() {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
+    let pageName = this.currentPage === 'learn' ? 'learning' : 'training';
     if (!item.readPages?.includes(this.getCurrentIndex())) {
       item.readPages?.push(this.getCurrentIndex());
       item.points += 10;
-      this.notify('Yay! You earned some points for ' + this.currentPage + 'ing. +10 pts', 'success');
+      this.notify('Yay! You earned some points for ' + pageName+'. +10 pts', 'success');
       this.update();
     }
   }

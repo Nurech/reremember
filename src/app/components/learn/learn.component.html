@@ -3,7 +3,7 @@
   <ng-container *ngFor="let item of learnMap; index as i">
     <ng-container *ngIf="userService?.userItem?.learn?.atPage === 0 && i === 0; else otherStuff">
       <div class="row">
-        <p class="p-5 text-2xl text-white justify-center text-center anton-font">
+        <p class="p-5 text-base text-white justify-center text-center anton-font">
       <span>Explore the magnificent world of <span
         class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">HUMAN COMPUTABLE
         PASSWORDS</span>. Learn how to generate secure & rememberable passwords with </span> <span
@@ -14,7 +14,7 @@
       <mat-divider class="mt-6"></mat-divider>
 
       <div class="row">
-        <p class="p-5 text-2xl text-white justify-center text-center anton-font">
+        <p class="p-5 text-base text-white justify-center text-center anton-font">
       <span>Earn <span
         class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">POINTS</span> by completing
         tasks. Show of your score to your friends and compare yourself against the average person!</span>
@@ -24,9 +24,8 @@
     <ng-template #otherStuff>
       <ng-container *ngIf="userService?.userItem?.learn?.atPage === i">
         <ng-container *ngFor="let txt of item.items">
-          <div *ngIf="txt.type === 'regular'" class="p-1 text-2xl text-white justify-center text-center anton-font">{{txt.data}}</div>
-          <div *ngIf="txt.type === 'special'"
-               class="p-1 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center">{{txt.data}}</div>
+          <div *ngIf="txt.type === 'regular'" class="p-1 text-base text-white justify-center text-center anton-font">{{txt.data}}</div>
+          <div *ngIf="txt.type === 'special'" class="p-1 text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center">{{txt.data}}</div>
           <div *ngIf="txt.type === 'image'" class="text-center pb-2"><img src="{{txt.data}}" alt=""></div>
 
         </ng-container>

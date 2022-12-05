@@ -14,7 +14,7 @@ export class FooterComponent {
   getRouterLink() {
     if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && this.userService.currentPage === 'learn') {
       return ['/train'];
-    } else if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && this.userService.currentPage === 'train') {
+    } else if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && (this.userService.currentPage === 'train' || this.userService.currentPage !== 'learn')) {
       return ['/results'];
     } else {
       return null;
