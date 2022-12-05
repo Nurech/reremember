@@ -71,6 +71,15 @@ memorize is very limited. In an attempt to ameliorate these difficulties, we pre
         data: `Mindhashes may appear to be an appealing solution to
 the problem of remembering different passwords. Whether
 such methods are truly usable for most humans is an intriguing open question.`
+      },
+      {
+        type: 'regular',
+        data: `You are expected to choose and remember 3 words, a wildcard character and a sequence containing one
+        uppercase letter, one number and one special character.`
+      },
+      {
+        type: 'regular',
+        data: `Then you can just use the webpage name to generate a secure password.`
       }
 
     ]
@@ -129,11 +138,10 @@ reconstructs each of his passwords by computing the response to a public challen
     items: [
       {
         type: 'special',
-        data: `3. SECURE PASSWORD SCREATION SCHEMA METHOD`
+        data: `3. SECURE PASSWORD CREATION SCHEMA METHOD`
       }, {
         type: 'regular',
-        data: `Are there any humanly usable, secure and publishable
-password generation methods?`
+        data: `Memorize a letter-to-word map - pick and remember a word for each letter from A to Z.`
       }
     ]
   },
@@ -141,10 +149,21 @@ password generation methods?`
     items: [
       {
         type: 'regular',
-        data: `A password schema consists of a sample space of al-
-lowable challenges called the dictionary and a set of in-
-structions for transforming challenges in the dictionary
-into passwords.`
+        data: `Lets say You want to generate a password for amazon website and Your words for relevant letters
+        are as follows:
+        A - aardvark,
+        M - mongoose,
+        Z - zorillo,
+        O - orangutan,
+        N - narwhal
+        `
+      }, {
+        type: 'regular',
+        data: `Now You just need to come up with a logic which feels logical for to follow.
+        For example we could use first 2 consonants from each word (excluding the first letter).`
+      }, {
+        type: 'regular',
+        data: `That way for amazon, we'd get: "rdngrdrlrnrw"`
       }
     ]
   },
@@ -152,24 +171,13 @@ into passwords.`
     items: [
       {
         type: 'regular',
-        data: `Most of our schemas will involve implicit or explicit char-
-acter-to-character maps. We write letters of the challenge
-
-as capitals A, B, C... and their map values (A)f, (B)f,
-(C)f... as lower-case letters (A)f=a, (B)f=b, (C)f=c.... We
-
-use (A)f instead of f(A) because human computation re-
-quires first retrieving A and then applying f.
-
-Our first set of schemas use a letter-to-digit map.`
-      }
-    ]
-  },
-  {
-    items: [
+        data: `To get around password validators requirements, You could come up with a sequence
+        containing one capital letter, one number and one special character, which You can append to all
+        the passwords you generate. `
+      },
       {
-        type: 'image',
-        data: `../../assets/images/schema.png`
+        type: 'regular',
+        data: `For example: "F3$", which would make the end result for our amazon password: "rdngrdrlrnrwF3$"`
       }
     ]
   },
@@ -188,7 +196,7 @@ Our first set of schemas use a letter-to-digit map.`
         data: `2. PUBLIC CHALLENGE METHOD`
       }, {
         type: 'special',
-        data: `3. SECURE PASSWORD SCREATION SCHEMA METHOD`
+        data: `3. SECURE PASSWORD CREATION SCHEMA METHOD`
       }
     ]
   }
