@@ -1,5 +1,5 @@
 <div class="container h-100">
-  <div class="row" *ngIf="userService?.userItem?.learn?.isDone && userService?.userItem?.train?.isDone; else Nope">
+  <div class="row" *ngIf="userService.isResultsOpen(); else Nope">
     <app-bar></app-bar>
   </div>
   <ng-template #Nope>

@@ -9,7 +9,7 @@ import { ToastService } from './toast.service';
 import { Router } from '@angular/router';
 import { learnMap } from '../components/learn/learn.component';
 import { trainMap } from '../components/train/train.component';
-import { ngDebounce } from '../utils/debounce';
+import { debounce } from 'typescript-debounce-decorator';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,6 @@ export class UserService {
   currentIndex: number = 0;
   maxIndex: number = 0;
   currentPage: string = '';
-
   docId = '';
 
   constructor(private localforageService: LocalforageService,
@@ -81,7 +80,7 @@ export class UserService {
     this.localforageService.set('userData43251351534', this.docId);
   }
 
-  @ngDebounce(2000)
+  @debounce(3000)
   update() {
     console.warn('this.userItem', this.userItem);
     this.dataService.updateDoc(this.docRef, this.userItem).then(r => console.log('update ok'));
@@ -190,7 +189,7 @@ export class UserService {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
     if (!item.readPages?.includes(this.currentIndex)) {
       item.readPages?.push(this.currentIndex);
-      item.points += 5;
+      item.points += 10;
       this.notify('Yay! You earned 10 pts for ' + this.currentPage + 'ing', 'success');
       this.update();
     }
@@ -199,14 +198,27 @@ export class UserService {
   nextPage() {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
     let currIndex = item.atPage;
-    if (currIndex + 1 <= learnMap.length - 1) {
-      if (currIndex + 1 === learnMap.length - 1) {
-        console.warn('user reached the end');
-        item.isDone = true;
+
+    if (this.currentPage === 'learn') {
+      if (currIndex + 1 <= learnMap.length - 1) {
+        if (currIndex + 1 === learnMap.length - 1) {
+          console.warn('user reached the end of learning');
+          item.isDone = true;
+        }
+        this.givePagePoint();
+        this.update();
+        item.atPage += 1;
       }
-      this.givePagePoint();
-      this.update();
-      item.atPage += 1;
+    } else if (this.currentPage === 'train') {
+      if (currIndex + 1 <= trainMap.length - 1) {
+        if (currIndex + 1 === trainMap.length - 1) {
+          console.warn('user reached the end of training');
+          item.isDone = true;
+        }
+        this.givePagePoint();
+        this.update();
+        item.atPage += 1;
+      }
     } else {
       return;
     }
@@ -226,4 +238,11 @@ export class UserService {
     }
   }
 
+  isTrainingOpen() {
+    return this.userItem?.learn?.isDone;
+  }
+
+  isResultsOpen() {
+    return this.userItem?.train?.isDone && this.userItem?.learn?.isDone;
+  }
 }

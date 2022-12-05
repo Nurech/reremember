@@ -15,13 +15,13 @@
             <mat-icon>school</mat-icon>
             <span>Your learning</span>
           </button>
-          <button mat-menu-item (click)="navigate('/train')" disabled>
+          <button mat-menu-item (click)="navigate('/train')" [disabled]="!userService.isTrainingOpen()">
             <mat-icon>fitness_center</mat-icon>
-            <span>Your training*</span>
+            <span>Your training</span>
           </button>
-          <button mat-menu-item (click)="navigate('/train')" disabled>
+          <button mat-menu-item (click)="navigate('/results')" [disabled]="!userService.isResultsOpen()">
             <mat-icon>scoreboard</mat-icon>
-            <span>Your results*</span>
+            <span>Your results</span>
           </button>
           <button mat-menu-item (click)="navigate('/stats')">
             <mat-icon>diversity_1</mat-icon>

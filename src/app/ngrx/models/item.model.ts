@@ -7,6 +7,7 @@ export interface Item {
   common: Common;
   learn: Learn;
   train: Train;
+  results: Result;
 }
 
 export interface Common {
@@ -30,4 +31,8 @@ export interface Train {
   clickedOpen: boolean;
   atPage: number;
   readPages: number[];
+}
+
+export interface Result {
+  isDone: boolean;
 }

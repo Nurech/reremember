@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from '../components/page-not-found/page-not-fou
 import { StatsComponent } from '../components/stats/stats.component';
 import { LearnComponent } from '../components/learn/learn.component';
 import { TrainComponent } from '../components/train/train.component';
+import { ResultsComponent } from '../components/results/results.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'stats', component: StatsComponent, data: { animation: 'StatsPage' } },
   { path: 'learn', component: LearnComponent, data: { animation: 'LearnPage' } },
   { path: 'train', component: TrainComponent, data: { animation: 'TrainPage' } },
+  { path: 'results', component: ResultsComponent, data: { animation: 'ResultsPage' } },
   { path: '**', component: PageNotFoundComponent, data: { animation: 'NotFoundPage' } }
 ];
 

@@ -19,7 +19,7 @@ export class DataService {
 
     const q = query(collection(this.db, 'items'));
     onSnapshot(q, (snapshot) => {
-      console.warn(snapshot);
+      // console.warn(snapshot);
       snapshot.docChanges().forEach((change) => {
 
         let item = {...change.doc.data(), id: change.doc.id} as Item;

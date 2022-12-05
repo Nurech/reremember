@@ -15,7 +15,6 @@
       <button mat-raised-button [color]="this.userService.maxIndex === this.userService.currentIndex ? 'warn' : 'primary'"
               class="nav-button"
               (click)="userService.nextPage()"
-              [disabled]="userService.maxIndex === userService.currentIndex && this.userService.currentPage !== 'learn'"
               [routerLink]="getRouterLink()">
         <ng-container *ngIf="userService.currentIndex === 0">Start!</ng-container>
         <ng-container *ngIf="userService.currentIndex !== 0 && userService.maxIndex !== userService.currentIndex">Next</ng-container>
