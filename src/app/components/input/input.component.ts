@@ -39,17 +39,17 @@ export class InputComponent implements OnInit, OnDestroy {
 
     if (this.for.includes('1')) {
       console.warn('in first test');
-      if (this.feedback.score >= 4) {
+      if (this.feedback.score >= 3) {
         this.userService.nextDisabled = false;
         this.userService.prevDisabled = false;
-      } else if (this.feedback.score < 4) {
+      } else if (this.feedback.score < 3) {
         this.userService.nextDisabled = true;
       }
     } else if (this.for.includes('2')) {
       console.warn('in second test');
       this.userService.nextDisabled = true;
       this.userService.prevDisabled = true;
-      if (this.feedback.score >= 4) {
+      if (this.feedback.score >= 3) {
         // @ts-ignore
         let prevValue = this.userService.userItem.result[this.for.replace(/[0-9]/g, '') + '1'];
         console.warn(prevValue);

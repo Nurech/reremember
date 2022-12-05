@@ -39,7 +39,7 @@ export const trainMap: any = [
       },
       {
         type: 'regular',
-        data: `How you generate secure and rememberable passwords is up to you. However, beware that we compare your password against "zxcvbn" model to verify password strength.  `
+        data: `How you generate secure and memorable passwords is up to you. However, beware that we compare your password against "zxcvbn" model to verify password strength.  `
       },
       {
         type: 'regular',
@@ -64,17 +64,20 @@ require learning, memorization of a secret key, and execution when logging in to
     items: [
       {
         type: 'regular',
-        data: `The user memorizes the letter hash using our method Memorization with
-
-help of words. The idea of this method is the following. The
-user looks at each letter pair, e.g., (a, q), and types the first
-word that comes to her mind that starts with the first letter
-and has the target letter as the next consonant, e.g., aqua.`
+        data: `So now it's time for you come up with:`
       },
       {
-        type: 'image',
-        data: `../../assets/images/aqua.png`
-      }
+        type: 'regular',
+        data: `1) three word sequence`
+      },
+      {
+        type: 'regular',
+        data: `2) a wildcard character`
+      },
+      {
+        type: 'regular',
+        data: `3) special character sequence`
+      },
     ]
   },
   {
@@ -85,17 +88,11 @@ and has the target letter as the next consonant, e.g., aqua.`
       },
       {
         type: 'regular',
-        data: `Here is your mindmap table I made for you! Try to generate a strong password using mindhasing techinique.`
+        data: `Lets say you need to create a password using that approach for reddit.`
       },
       {
-        type: 'table',
-        cols: ['word1', 'word2'],
-        tableData: [
-          {word1: 'calculation', word2: 'jest'},
-          {word1: 'bland', word2: 'bench'},
-          {word1: 'neglect', word2: 'alarm'},
-          {word1: 'compliance', word2: 'division'}
-        ]
+        type: 'regular',
+        data: `Remember: For every letter present in your word sequence, pick the next letter from your sequence. For missing letters use the wildcard value. And append the special character sequence to the end.`
       },
       {
         type: 'input',
@@ -108,17 +105,7 @@ and has the target letter as the next consonant, e.g., aqua.`
     items: [
       {
         type: 'regular',
-        data: `Good job! I hope you were paying attention. Let's test your selected method. Write the same password again.`
-      },
-      {
-        type: 'table',
-        cols: ['word1', 'word2'],
-        tableData: [
-          {word1: 'calculation', word2: 'jest'},
-          {word1: 'bland', word2: 'bench'},
-          {word1: 'neglect', word2: 'alarm'},
-          {word1: 'compliance', word2: 'division'}
-        ]
+        data: `Good job! I hope you were paying attention. Let's test your selected method. Write the same password again for reddit.`
       },
       {
         type: 'input',
@@ -271,11 +258,7 @@ C = (I0, . . . , I13) would correspond to an ordered subset of those images.`
       },
       {
         type: 'regular',
-        data: `Rememeber, a password schema consists of a sample space of al-
-lowable challenges called the dictionary and a set of in-
-structions for transforming challenges in the dictionary
-
-into passwords.`
+        data: `Remember, a password schema consists of a memorizing a word corresponding to each letter of the alphabet.`
       }
     ]
   },
@@ -283,7 +266,11 @@ into passwords.`
     items: [
       {
         type: 'regular',
-        data: `Okay so the last one may not be that intuitive but, create a custom phonetic alphabet and generate passwords from website names. Remember your own word corresponding to each letter in an alphabet, use the NATO phonetic alphabet as an example.`
+        data: `Okay so the last one may not be that intuitive but, create a custom phonetic alphabet and generate passwords from website names. Remember Your own word corresponding to each letter in an alphabet, you can try it out with the NATO phonetic alphabet as an example if You already know it.`
+      },
+      {
+        type: 'regular',
+        data: `However, remember that this method is only secure, if You come up with Your own letter-to-word map.`
       }
     ]
   },
@@ -291,13 +278,11 @@ into passwords.`
     items: [
       {
         type: 'regular',
-        data: `Imagine a function (f). We write letters of the challenge
-
-as capitals A, B, C... and their map values (A)f, (B)f,
-(C)f... as lower-case letters (A)f=a, (B)f=b, (C)f=c.... We
-
-use (A)f instead of f(A) because human computation re-
-quires first retrieving A and then applying f.`
+        data: `Try coming up with a password for reddit using that method!`
+      },
+      {
+        type: 'regular',
+        data: `Just to help You get going, the first letter in reddit is r, so remember the word corresponding to r and use the second and input the second and third consonant from that word.`
       },
       {
         type: 'input',
