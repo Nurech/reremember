@@ -6,7 +6,7 @@
 <div class="row">
 <ng-container *ngIf="feedback?.score !== null">
   <div class="w-100 d-flex justify-center align-items-center flex-column">
-<span>This password score is: {{feedback?.score}}. It will be cracked in
+<span>This password score is: {{feedback?.score}}. It can be cracked in
   {{feedback?.crack_times_display?.offline_slow_hashing_1e4_per_second}}. <ng-container
     *ngFor="let suggest of feedback?.feedback?.suggestions">{{suggest}}.⠀</ng-container> </span>
   </div>
