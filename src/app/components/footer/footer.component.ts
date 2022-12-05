@@ -12,22 +12,22 @@ export class FooterComponent {
   constructor(public userService: UserService) { }
 
   getRouterLink() {
-    if (this.userService.maxIndex === this.userService.currentIndex && this.userService.currentPage === 'learn') {
-      return ['/train']
-    } else if (this.userService.maxIndex === this.userService.currentIndex && this.userService.currentPage === 'train') {
-      return ['/results']
+    if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && this.userService.currentPage === 'learn') {
+      return ['/train'];
+    } else if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && this.userService.currentPage === 'train') {
+      return ['/results'];
     } else {
-      return null
+      return null;
     }
   }
 
   getEndButtonTxt() {
-    if (this.userService.maxIndex === this.userService.currentIndex && this.userService.currentPage === 'learn') {
-      return 'Done! Train?'
-    } else if (this.userService.maxIndex === this.userService.currentIndex && this.userService.currentPage === 'train') {
-      return 'Done! Results?'
+    if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && this.userService.currentPage === 'learn') {
+      return 'Done! Train?';
+    } else if (this.userService.getMaxIndex() === this.userService.getCurrentIndex() && (this.userService.currentPage === 'train' || this.userService.currentPage !== 'learn')) {
+      return 'Done! Results?';
     } else {
-      return 'Next'
+      return 'Next';
     }
   }
 

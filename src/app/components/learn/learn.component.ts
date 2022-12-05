@@ -13,6 +13,7 @@ export class LearnComponent implements OnInit {
   constructor(public userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.currentPage = 'learn';
   }
 
 }

@@ -19,11 +19,10 @@ export class UserService {
   userItem: Item = {} as Item;
   userDocSnap: any;
   docRef: any;
-  currentIndex: number = 0;
-  maxIndex: number = 0;
   currentPage: string = '';
   docId = '';
   nextDisabled = false;
+  prevDisabled = false;
 
   constructor(private localforageService: LocalforageService,
               private dataService: DataService,
@@ -58,20 +57,7 @@ export class UserService {
   createItem() {
     console.warn('creating new user');
     this.userItem.name = this.generateUserName();
-    this.userItem.common = {} as Common;
-    this.userItem.result = {} as Result;
-    this.userItem.result.mindmap1 = '';
-    this.userItem.result.mindmap1Score = 0;
-    this.userItem.common.points = 0;
-    this.userItem.train = {} as Train;
-    this.userItem.train.points = 0;
-    this.userItem.train.atPage = 0;
-    this.userItem.train.readPages = [];
-    this.userItem.learn = {} as Learn;
-    this.userItem.learn.points = 0;
-    this.userItem.learn.atPage = 0;
-    this.userItem.learn.readPages = [];
-
+    this.initUserItem();
     this.dataService.addDoc(this.userItem).then((item) => {
       this.docRef = item as any;
       this.docId = item.id;
@@ -125,9 +111,12 @@ export class UserService {
     }
   }
 
-  notify(message: string, type: 'success') {
+  notify(message: string, type: string) {
     if (type === 'success') {
       this.toastService.showSuccess(message);
+    }
+    if (type === 'fail') {
+      this.toastService.showFailure(message);
     }
   }
 
@@ -175,24 +164,15 @@ export class UserService {
   }
 
   isShowFooter() {
-    if (this.router.url.includes('learn')) {
-      this.maxIndex = learnMap.length - 1;
-      this.currentPage = 'learn';
-      this.currentIndex = this.userItem?.learn?.atPage;
-    } else if (this.router.url.includes('train')) {
-      this.maxIndex = trainMap.length - 1;
-      this.currentPage = 'train';
-      this.currentIndex = this.userItem?.train?.atPage;
-    } else {
-      this.currentPage = '';
-    }
-    return this.router.url.includes('learn') || this.router.url.includes('train');
+    console.warn(this.currentPage);
+    return ['learn', 'train', 'mindmap1', 'mindmap2', 'squares1', 'squares2']
+      .includes(this.currentPage.replace(/^a-zA-Z0-9 ]/g, ''));
   }
 
   givePagePoint() {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
-    if (!item.readPages?.includes(this.currentIndex)) {
-      item.readPages?.push(this.currentIndex);
+    if (!item.readPages?.includes(this.getCurrentIndex())) {
+      item.readPages?.push(this.getCurrentIndex());
       item.points += 10;
       this.notify('Yay! You earned 10 pts for ' + this.currentPage + 'ing', 'success');
       this.update();
@@ -201,7 +181,11 @@ export class UserService {
 
   nextPage() {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
-    let currIndex = item.atPage;
+    let currIndex = this.getCurrentIndex();
+
+    console.warn(this.currentPage);
+    console.warn(currIndex);
+    console.warn(learnMap.length - 1);
 
     if (this.currentPage === 'learn') {
       if (currIndex + 1 <= learnMap.length - 1) {
@@ -209,11 +193,12 @@ export class UserService {
           console.warn('user reached the end of learning');
           item.isDone = true;
         }
+        console.warn('here');
         this.givePagePoint();
         this.update();
         item.atPage += 1;
       }
-    } else if (this.currentPage === 'train') {
+    } else {
       if (currIndex + 1 <= trainMap.length - 1) {
         if (currIndex + 1 === trainMap.length - 1) {
           console.warn('user reached the end of training');
@@ -223,8 +208,6 @@ export class UserService {
         this.update();
         item.atPage += 1;
       }
-    } else {
-      return;
     }
 
   }
@@ -250,5 +233,72 @@ export class UserService {
 
   isNextDisabled() {
     return this.nextDisabled;
+  }
+
+  isPrevDisabled() {
+    return this.prevDisabled;
+  }
+
+  giveUp() {
+    // @ts-ignore
+    this.userItem.result[this.currentPage] = this.userItem.result[this.currentPage.replace(/[0-9]/g, '') + '1'];
+    this.userItem.train.points -= 25;
+    this.nextDisabled = false;
+    this.prevDisabled = false;
+    this.notify('Oh no! You lost some points because you gave up! -25 pts', 'fail');
+    this.update();
+  }
+
+  showGiveUp() {
+    console.warn('this.currentPage', this.currentPage);
+    if (['mindmap2', 'squares2'].includes(this.currentPage)) {
+      // @ts-ignore
+      let currentVal = this.userItem.result[this.currentPage];
+      // @ts-ignore
+      let prevValue = this.userItem.result[this.currentPage.replace(/[0-9]/g, '') + '1'];
+      console.warn('showGiveUp()', prevValue, currentVal);
+      if (currentVal != prevValue) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private initUserItem() {
+    this.userItem.common = {} as Common;
+    this.userItem.common.points = 0;
+    this.userItem.train = {} as Train;
+    this.userItem.train.points = 0;
+    this.userItem.train.atPage = 0;
+    this.userItem.train.readPages = [];
+    this.userItem.learn = {} as Learn;
+    this.userItem.learn.points = 0;
+    this.userItem.learn.atPage = 0;
+    this.userItem.learn.readPages = [];
+    this.userItem.result = {} as Result;
+    this.userItem.result.mindmap1 = '';
+    this.userItem.result.mindmap1Score = 0;
+    this.userItem.result.mindmap2 = '';
+    this.userItem.result.mindmap2Score = 0;
+    this.userItem.result.squares1 = '';
+    this.userItem.result.squares1Score = 0;
+    this.userItem.result.squares2 = '';
+    this.userItem.result.squares2Score = 0;
+  }
+
+  getCurrentIndex() {
+    if (this.currentPage == 'learn') {
+      return this.userItem.learn?.atPage;
+    } else {
+      return this.userItem.train?.atPage;
+    }
+  }
+
+  getMaxIndex() {
+    if (this.currentPage == 'learn') {
+      return learnMap.length - 1;
+    } else {
+      return trainMap.length - 1;
+    }
   }
 }

@@ -37,4 +37,10 @@ export interface Result {
   isDone: boolean;
   mindmap1: string;
   mindmap1Score: number;
+  mindmap2: string;
+  mindmap2Score: number;
+  squares1: string;
+  squares1Score: number;
+  squares2: string;
+  squares2Score: number;
 }

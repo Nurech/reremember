@@ -1,13 +1,15 @@
 <div class="mb-6 row">
   <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 text-white">Your mindmap password</label>
-  <input maxlength="25" type="text" id="large-input" #self (input)="onInput(self.value)" [value]="value"
+  <input maxlength="25" type="text" id="large-input" #self (input)="onInput(self.value)" [value]="getValue()"
          class="text-2xl block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 </div>
 <div class="row">
 <ng-container *ngIf="feedback?.score !== null">
+  <div class="w-100 d-flex justify-center align-items-center flex-column">
 <span>This password score is: {{feedback?.score}}. It will be cracked in
   {{feedback?.crack_times_display?.offline_slow_hashing_1e4_per_second}}. <ng-container
     *ngFor="let suggest of feedback?.feedback?.suggestions">{{suggest}}</ng-container> </span>
+  </div>
 </ng-container>
 </div>
 

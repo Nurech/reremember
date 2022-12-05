@@ -13,4 +13,10 @@ export class ToastService {
       timeOut: 4000, closeButton: true, positionClass: 'toast-top-center', progressBar: true
     });
   }
+
+  showFailure(message: string) {
+    this.toastr.error(message, '', {
+      timeOut: 4000, closeButton: true, positionClass: 'toast-top-center', progressBar: true
+    });
+  }
 }
