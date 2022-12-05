@@ -32,7 +32,11 @@ import { ModalComponent } from './components/modal/modal.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RatingComponent } from './components/rating/rating.component';
+import { TableComponent } from './components/table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { InputComponent } from './components/input/input.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { FormsModule } from '@angular/forms';
     ResultsComponent,
     BarComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    RatingComponent,
+    TableComponent,
+    InputComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +78,9 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

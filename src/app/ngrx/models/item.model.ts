@@ -7,7 +7,7 @@ export interface Item {
   common: Common;
   learn: Learn;
   train: Train;
-  results: Result;
+  result: Result;
 }
 
 export interface Common {
@@ -35,4 +35,6 @@ export interface Train {
 
 export interface Result {
   isDone: boolean;
+  mindmap1: string;
+  mindmap1Score: number;
 }

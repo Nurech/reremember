@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalforageService } from './localforage.service';
 import { DataService } from './data.service';
-import { Common, Item, Learn, Train } from '../ngrx/models/item.model';
+import { Common, Item, Learn, Result, Train } from '../ngrx/models/item.model';
 import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../components/modal/modal.component';
@@ -23,6 +23,7 @@ export class UserService {
   maxIndex: number = 0;
   currentPage: string = '';
   docId = '';
+  nextDisabled = false;
 
   constructor(private localforageService: LocalforageService,
               private dataService: DataService,
@@ -58,6 +59,9 @@ export class UserService {
     console.warn('creating new user');
     this.userItem.name = this.generateUserName();
     this.userItem.common = {} as Common;
+    this.userItem.result = {} as Result;
+    this.userItem.result.mindmap1 = '';
+    this.userItem.result.mindmap1Score = 0;
     this.userItem.common.points = 0;
     this.userItem.train = {} as Train;
     this.userItem.train.points = 0;
@@ -228,8 +232,6 @@ export class UserService {
   prevPage() {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
     let currIndex = item.atPage;
-    console.warn(item);
-    console.warn(currIndex);
     if (currIndex - 1 >= 0) {
       item.atPage -= 1;
       this.update();
@@ -244,5 +246,9 @@ export class UserService {
 
   isResultsOpen() {
     return this.userItem?.train?.isDone && this.userItem?.learn?.isDone;
+  }
+
+  isNextDisabled() {
+    return this.nextDisabled;
   }
 }
