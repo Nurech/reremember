@@ -36,7 +36,6 @@ export class InputComponent implements OnInit, OnDestroy {
     console.warn(this.feedback);
 
     this.userService.nextDisabled = true;
-    this.userService.prevDisabled = true;
 
     if (this.for.includes('1')) {
       console.warn('in first test');

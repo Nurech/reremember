@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="h-100 py-2">
   <div class="row w-100">
 
     <div class="col d-flex align-items-center">
@@ -44,8 +44,7 @@
     <div class="col justify-content-end align-items-center d-flex">
       <mat-chip-list>
         <mat-chip color="primary" (click)="userService.clickOnPoints()">
-          {{userService.getTotalUserPoints()}} points&nbsp;
-          <mat-icon>hub</mat-icon>
+          {{userService.getTotalUserPoints()}} pts
         </mat-chip>
       </mat-chip-list>
 
