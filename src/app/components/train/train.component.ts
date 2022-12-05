@@ -18,7 +18,7 @@ export class TrainComponent implements OnInit {
 
 }
 
-export const trainMap = [
+export const trainMap: any = [
   {
     items: [
       {
@@ -51,11 +51,11 @@ export const trainMap = [
     items: [
       {
         type: 'special',
-        data: `1. MINDHASHES METHOD`
+        data: `1. MINDMAPS METHOD`
       },
       {
         type: 'regular',
-        data: `Remember, mindhashes
+        data: `Remember, mindhashes/mindmaps
 require learning, memorization of a secret key, and execution when logging in to an account.`
       }
     ]
@@ -130,6 +130,37 @@ and has the target letter as the next consonant, e.g., aqua.`
   {
     items: [
       {
+        type: 'question',
+        data: {
+          label: 'mindmap',
+          q: 'Would you use this in practical world?',
+          for: 'Q1',
+          title: 'MINDMAP METHOD'
+        }
+      },
+      {
+        type: 'question',
+        data: {
+          label: 'mindmap',
+          q: 'Do you think this will produce secure passwords?',
+          for: 'Q2',
+          title: 'MINDMAP METHOD'
+        }
+      },
+      {
+        type: 'question',
+        data: {
+          label: 'mindmap',
+          q: 'How easy is it to produce passwords with this method?',
+          for: 'Q3',
+          title: 'MINDMAP METHOD'
+        }
+      }
+    ]
+  },
+  {
+    items: [
+      {
         type: 'regular',
         data: `Very nice!!! Now were done with mindmaps. Let's take a look at another method.`
       }
@@ -190,6 +221,130 @@ C = (I0, . . . , I13) would correspond to an ordered subset of those images.`
       {
         type: 'input',
         for: 'squares2'
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'question',
+        data: {
+          label: 'squares',
+          q: 'Would you use this in practical world?',
+          for: 'Q1',
+          title: 'PUBLIC CHALLENGE METHOD'
+        }
+      },
+      {
+        type: 'question',
+        data: {
+          label: 'squares',
+          q: 'Do you think this will produce secure passwords?',
+          for: 'Q2',
+          title: 'PUBLIC CHALLENGE METHOD'
+        }
+      },
+      {
+        type: 'question',
+        data: {
+          label: 'squares',
+          q: 'How easy is it to produce passwords with this method?',
+          for: 'Q3',
+          title: 'PUBLIC CHALLENGE METHOD'
+        }
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'regular',
+        data: `Okay. That was pretty sweet. Ready for the last one?`
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'special',
+        data: `3. SECURE PASSWORD CREATION SCHEMA METHOD`
+      },
+      {
+        type: 'regular',
+        data: `Rememeber, a password schema consists of a sample space of al-
+lowable challenges called the dictionary and a set of in-
+structions for transforming challenges in the dictionary
+
+into passwords.`
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'regular',
+        data: `Okay so the last one may not be that intuitive but, create a custom phonetic alphabet and generate passwords from website names. Remember your own word corresponding to each letter in an alphabet, use the NATO phonetic alphabet as an example.`
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'regular',
+        data: `Imagine a function (f). We write letters of the challenge
+
+as capitals A, B, C... and their map values (A)f, (B)f,
+(C)f... as lower-case letters (A)f=a, (B)f=b, (C)f=c.... We
+
+use (A)f instead of f(A) because human computation re-
+quires first retrieving A and then applying f.`
+      },
+      {
+        type: 'input',
+        for: 'function1'
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'regular',
+        data: `Imagine the same function (f). Try to repeat the password.`
+      },
+      {
+        type: 'input',
+        for: 'function2'
+      }
+    ]
+  },
+  {
+    items: [
+      {
+        type: 'question',
+        data: {
+          label: 'function',
+          q: 'Would you use this in practical world?',
+          for: 'Q1',
+          title: 'CREATION SCHEMA METHOD'
+        }
+      },
+      {
+        type: 'question',
+        data: {
+          label: 'function',
+          q: 'Do you think this will produce secure passwords?',
+          for: 'Q2',
+          title: 'CREATION SCHEMA METHOD'
+        }
+      },
+      {
+        type: 'question',
+        data: {
+          label: 'function',
+          q: 'How easy is it to produce passwords with this method?',
+          for: 'Q3',
+          title: 'CREATION SCHEMA METHOD'
+        }
       }
     ]
   },

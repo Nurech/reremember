@@ -1,13 +1,14 @@
 <div class="container d-flex flex-column justify-content-center align-items-center h-100">
 
-  <ng-container *ngFor="let item of trainMap; index as i">
-    <ng-container *ngFor="let txt of item.items">
+  <ng-container *ngFor="let page of trainMap; index as i">
+    <ng-container *ngFor="let item of page.items">
       <ng-container *ngIf="userService?.userItem?.train?.atPage === i">
-      <div *ngIf="txt.type === 'regular'" class="p-1 text-2xl text-white justify-center text-center anton-font">{{txt.data}}</div>
-      <div *ngIf="txt.type === 'special'" class="p-1 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center">{{txt.data}}</div>
-      <div *ngIf="txt.type === 'image'" class="text-center pb-2"><img src="{{txt.data}}" alt=""></div>
-      <div *ngIf="txt.type === 'table'" class="text-center pb-2 w-100"><app-table [cols]="txt?.cols" [data]="txt?.tableData"></app-table></div>
-      <div *ngIf="txt.type === 'input'" class="text-center pb-2 w-100"><app-input [for]="txt.for"></app-input></div>
+      <div *ngIf="item.type === 'regular'" class="p-1 text-2xl text-white justify-center text-center anton-font">{{item.data}}</div>
+      <div *ngIf="item.type === 'special'" class="p-1 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center">{{item.data}}</div>
+      <div *ngIf="item.type === 'image'" class="text-center pb-2"><img src="{{item.data}}" alt=""></div>
+      <div *ngIf="item.type === 'table'" class="text-center pb-2 w-100"><app-table [cols]="item.cols" [data]="item?.tableData"></app-table></div>
+      <div *ngIf="item.type === 'input'" class="text-center pb-2 w-100"><app-input [for]="item.for"></app-input></div>
+      <div *ngIf="item.type === 'question'" class="text-center pb-2 w-100"><app-question [data]="item.data"></app-question></div>
       </ng-container>
     </ng-container>
   </ng-container>

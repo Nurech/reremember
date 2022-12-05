@@ -70,7 +70,7 @@ export class UserService {
     this.localforageService.set('userData43251351534', this.docId);
   }
 
-  @debounce(3000)
+  @debounce(1000)
   update() {
     console.warn('this.userItem', this.userItem);
     this.dataService.updateDoc(this.docRef, this.userItem).then(r => console.log('update ok'));
@@ -131,7 +131,7 @@ export class UserService {
         if (!this.userItem.common.editUserName) {
           this.userItem.common.editUserName = true;
           this.userItem.common.points += 5;
-          this.notify('Yay! You earned 5pts for changing your name', 'success');
+          this.notify('Yay! You earned some points for changing your name. +5 pts', 'success');
         }
         this.userItem.name = data.username;
         this.update();
@@ -147,7 +147,7 @@ export class UserService {
     if (!this.userItem.learn.clickedOpen) {
       this.userItem.learn.clickedOpen = true;
       this.userItem.learn.points += 5;
-      this.notify('Yay! You earned 10 pts for starting to learn things', 'success');
+      this.notify('Yay! You earned some points for starting to learn things. +10 pts ', 'success');
       this.update();
     }
     this.router.navigate(['learn']);
@@ -164,9 +164,8 @@ export class UserService {
   }
 
   isShowFooter() {
-    console.warn(this.currentPage);
-    return ['learn', 'train', 'mindmap1', 'mindmap2', 'squares1', 'squares2']
-      .includes(this.currentPage.replace(/^a-zA-Z0-9 ]/g, ''));
+    let currentUrl = this.router.url;
+    return !['home', 'stats', 'results'].includes(currentUrl.replace(/[^a-zA-Z0-9 ]/g, ''));
   }
 
   givePagePoint() {
@@ -174,7 +173,7 @@ export class UserService {
     if (!item.readPages?.includes(this.getCurrentIndex())) {
       item.readPages?.push(this.getCurrentIndex());
       item.points += 10;
-      this.notify('Yay! You earned 10 pts for ' + this.currentPage + 'ing', 'success');
+      this.notify('Yay! You earned some points for ' + this.currentPage + 'ing. +10 pts', 'success');
       this.update();
     }
   }
@@ -183,17 +182,12 @@ export class UserService {
     let item = this.currentPage === 'learn' ? this.userItem.learn : this.userItem.train;
     let currIndex = this.getCurrentIndex();
 
-    console.warn(this.currentPage);
-    console.warn(currIndex);
-    console.warn(learnMap.length - 1);
-
     if (this.currentPage === 'learn') {
       if (currIndex + 1 <= learnMap.length - 1) {
         if (currIndex + 1 === learnMap.length - 1) {
           console.warn('user reached the end of learning');
           item.isDone = true;
         }
-        console.warn('here');
         this.givePagePoint();
         this.update();
         item.atPage += 1;
@@ -250,13 +244,11 @@ export class UserService {
   }
 
   showGiveUp() {
-    console.warn('this.currentPage', this.currentPage);
-    if (['mindmap2', 'squares2'].includes(this.currentPage)) {
+    if (['mindmap2', 'squares2', 'function2'].includes(this.currentPage)) {
       // @ts-ignore
       let currentVal = this.userItem.result[this.currentPage];
       // @ts-ignore
       let prevValue = this.userItem.result[this.currentPage.replace(/[0-9]/g, '') + '1'];
-      console.warn('showGiveUp()', prevValue, currentVal);
       if (currentVal != prevValue) {
         return true;
       }
@@ -284,6 +276,31 @@ export class UserService {
     this.userItem.result.squares1Score = 0;
     this.userItem.result.squares2 = '';
     this.userItem.result.squares2Score = 0;
+    this.userItem.result.function1 = '';
+    this.userItem.result.function1Score = 0;
+    this.userItem.result.function2 = '';
+    this.userItem.result.function2Score = 0;
+
+    this.userItem.result.mindmapQ1 = '';
+    this.userItem.result.mindmapQ1Score = '';
+    this.userItem.result.mindmapQ2 = '';
+    this.userItem.result.mindmapQ2Score = '';
+    this.userItem.result.mindmapQ3 = '';
+    this.userItem.result.mindmapQ3Score = '';
+
+    this.userItem.result.squaresQ1 = '';
+    this.userItem.result.squaresQ1Score = '';
+    this.userItem.result.squaresQ2 = '';
+    this.userItem.result.squaresQ2Score = '';
+    this.userItem.result.squaresQ3 = '';
+    this.userItem.result.squaresQ3Score = '';
+
+    this.userItem.result.functionQ1 = '';
+    this.userItem.result.functionQ1Score = '';
+    this.userItem.result.functionQ2 = '';
+    this.userItem.result.functionQ2Score = '';
+    this.userItem.result.functionQ3 = '';
+    this.userItem.result.functionQ3Score = '';
   }
 
   getCurrentIndex() {
@@ -300,5 +317,10 @@ export class UserService {
     } else {
       return trainMap.length - 1;
     }
+  }
+
+  thanksForVoting() {
+    this.userItem.train.points += 5;
+    this.notify('Thanks for voting! +5 pts', 'success')
   }
 }

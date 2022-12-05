@@ -37,6 +37,8 @@ import { RatingComponent } from './components/rating/rating.component';
 import { TableComponent } from './components/table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { InputComponent } from './components/input/input.component';
+import { QuestionComponent } from './components/question/question.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -54,34 +56,36 @@ import { InputComponent } from './components/input/input.component';
     RatingComponent,
     TableComponent,
     InputComponent,
+    QuestionComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatChipsModule,
-    MatDividerModule,
-    NgxTypedJsModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    }),
-    ToastrModule.forRoot(),
-    StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([]),
-    MatFormFieldModule,
-    MatDialogModule,
-    MatInputModule,
-    FormsModule,
-    MatTableModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore()),
+        AppRoutingModule,
+        StoreModule.forRoot({}, {}),
+        MatButtonModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatChipsModule,
+        MatDividerModule,
+        NgxTypedJsModule,
+        NgxEchartsModule.forRoot({
+            echarts: () => import('echarts')
+        }),
+        ToastrModule.forRoot(),
+        StoreModule.forRoot(reducers, {metaReducers}),
+        EffectsModule.forRoot([]),
+        MatFormFieldModule,
+        MatDialogModule,
+        MatInputModule,
+        FormsModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        MatRadioModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
