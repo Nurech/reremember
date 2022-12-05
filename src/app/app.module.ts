@@ -23,7 +23,6 @@ import { TrainComponent } from './components/train/train.component';
 import { LearnComponent } from './components/learn/learn.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ResultsComponent } from './components/results/results.component';
-import { BarComponent } from './components/charts/bar/bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
@@ -39,6 +38,7 @@ import { MatTableModule } from '@angular/material/table';
 import { InputComponent } from './components/input/input.component';
 import { QuestionComponent } from './components/question/question.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { ChartComponent } from './components/charts/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { MatRadioModule } from '@angular/material/radio';
     TrainComponent,
     LearnComponent,
     ResultsComponent,
-    BarComponent,
+    ChartComponent,
     FooterComponent,
     ModalComponent,
     RatingComponent,

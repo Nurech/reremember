@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions} from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { DataService } from '../../services/data.service';
 import { ToastService } from '../../services/toast.service';
 import { LocalforageService } from '../../services/localforage.service';
 import { IRootState } from '../root-store/IRootState';
-import { SubscriptionService } from '../../services/subscription.service';
 
 @Injectable()
 export class ItemsEffects {
@@ -16,7 +15,6 @@ export class ItemsEffects {
     private dataService: DataService,
     private toastService: ToastService,
     private localforageService: LocalforageService,
-    private subService: SubscriptionService
   ) {}
 
 }

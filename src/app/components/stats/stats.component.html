@@ -1,10 +1,22 @@
 <div class="container h-100">
-  <div class="row" *ngIf="userService.isResultsOpen(); else Nope">
-    <app-bar></app-bar>
+
+  <ng-container *ngIf="userService.isResultsOpen(); else Nope">
+
+  <div class="row">
+    <div class="col-sm">
+      <app-chart [type]="'points'" [compareSelf]="false"></app-chart>
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
   </div>
+
+  </ng-container>
+
   <ng-template #Nope>
     <div class="w-100 h-100 text-center d-flex justify-content-center align-items-center p-5 text-2xl text-white justify-center text-center anton-font">
       You can see stats after completing your learning and training ;)
     </div>
   </ng-template>
+
 </div>
