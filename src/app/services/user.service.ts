@@ -49,15 +49,18 @@ export class UserService {
     this.docRef = await this.dataService.getDocRef(id);
     return this.dataService.getDoc(this.docRef).then(item => {
       this.userDocSnap = item;
-      console.warn(item.data())
-      this.userItem = item.data() as Item;
-      console.warn('item from db: ', item);
+      console.warn(item.data());
+      if (item.data()) {
+        this.userItem = item.data() as Item;
+        console.warn('item from db: ', item);
+      }
     });
   }
 
   createItem() {
     console.warn('creating new user');
-    Object.assign( this.userItem, {name: ''})
+    Object.assign(this.userItem, {name: ''});
+    console.warn('this.userItem', this.userItem);
     this.userItem.name = this.generateUserName();
     this.initUserItem();
     this.dataService.addDoc(this.userItem).then((item) => {
@@ -176,7 +179,7 @@ export class UserService {
     if (!item.readPages?.includes(this.getCurrentIndex())) {
       item.readPages?.push(this.getCurrentIndex());
       item.points += 10;
-      this.notify('Yay! You earned some points for ' + pageName+'. +10 pts', 'success');
+      this.notify('Yay! You earned some points for ' + pageName + '. +10 pts', 'success');
       this.update();
     }
   }
@@ -324,6 +327,6 @@ export class UserService {
 
   thanksForVoting() {
     this.userItem.train.points += 5;
-    this.notify('Thanks for voting! +5 pts', 'success')
+    this.notify('Thanks for voting! +5 pts', 'success');
   }
 }
