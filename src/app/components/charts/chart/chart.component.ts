@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit} from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import type { EChartsOption } from 'echarts';
 import { UserService } from '../../../services/user.service';
 import { Store } from '@ngrx/store';
@@ -31,104 +31,31 @@ export class ChartComponent implements OnInit {
 
       if (this.type === 'points') {
         this.createPointsChart(data);
+      } else if (this.type === 'learning') {
+        this.createLearningChart(data);
       } else {
         this.createOtherChart(data);
       }
     });
   }
 
-  createPointsChart(data: Item[]) {
-    let pointsOption: EChartsOption = {
+  createLearningChart(data: Item[]) {
+    let learnOption: EChartsOption = {
+      legend: {
+        padding: [5, 0, 0, 0],
+        textStyle: {
+          color: '#fff'
+        }
+      },
       title: {
         show: true,
-        text: 'Average points earned',
+        text: 'Started learning & training',
         textStyle: {
           color: '#fff'
         },
         textAlign: 'center',
         left: '50%',
-        top: '5%'
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis: [
-        {
-          type: 'category',
-          data: ['Others'],
-          axisTick: {
-            alignWithLabel: true
-          },
-          axisLabel: {
-            show: false,
-            hideOverlap: false
-          }
-        }
-
-      ],
-      yAxis: [
-        {
-          type: 'value'
-
-        }
-      ],
-      series: [
-        {
-          name: 'Points',
-          type: 'bar',
-          data: [],
-          tooltip: {
-            valueFormatter: value => Math.round(Number(value)).toString()
-          }
-        }
-      ]
-    };
-
-    let averageScore = 0;
-    data.forEach(i => {
-      let points = i.common?.points + i.train?.points + i.learn?.points;
-      averageScore = (points + averageScore) / 2;
-    });
-
-    // @ts-ignore
-    pointsOption?.series[0].data.push(averageScore);
-
-
-    if (this.compareSelf) {
-      let myId = this.userService.docId;
-      let i = data.find(e => e.id === myId);
-      if (i) {
-        let myScore = i.common?.points + i.train?.points + i.learn?.points;
-        // @ts-ignore
-        pointsOption?.series[0].data.push(myScore);
-        // @ts-ignore
-        pointsOption?.xAxis[0].data.push('You');
-      }
-    }
-
-    this.options = pointsOption;
-  }
-
-  createOtherChart(data: Item[]) {
-    let otherOption: EChartsOption = {
-      title: {
-        show: true,
-        text: '',
-        textStyle: {
-          color: '#fff'
-        },
-        textAlign: 'center',
-        left: '50%',
-        top: '5%'
+        top: '8%'
       },
       tooltip: {
         extraCssText: 'max-width: 200px;white-space: pre-wrap; line-height: 1.5',
@@ -167,18 +94,218 @@ export class ChartComponent implements OnInit {
       series: []
     };
 
-    let myTitle = ''
+    let started = 0;
+    let ended = 0;
+    data.forEach(i => {
+      if (i.learn.readPages?.length > 0) {
+        started += 1
+      }
+      if (i.learn.isDone && i.train.isDone) {
+        ended += 1
+      }
+    });
 
-    if (this.type === 'mindmap') {
-      myTitle = 'Mindmap'
-    } else  if (this.type === 'squares') {
-      myTitle = 'Public Challange method'
-    } else  if (this.type === 'function') {
-      myTitle = 'Challange method'
+    console.warn('started', started)
+    console.warn('ended', ended)
+
+    let dataSet = [['title','Started', 'Finished']];
+    let thisSeries = [];
+    thisSeries.push({
+      type: 'bar', label: {
+        show: true,
+        position: 'inside'
+      }
+    },{
+      type: 'bar', label: {
+        show: true,
+        position: 'inside'
+      }
+    });
+
+    // @ts-ignore
+    dataSet.push(['Progress', started, ended]);
+
+
+    // @ts-ignore
+    learnOption.series = thisSeries;
+    // @ts-ignore
+    learnOption.dataset.source = dataSet;
+
+    this.options = learnOption;
+
+    console.warn('this.options', this.options);
+  }
+
+  createPointsChart(data: Item[]) {
+    let pointsOption: EChartsOption = {
+      legend: {
+        padding: [5, 0, 0, 0],
+        textStyle: {
+          color: '#fff'
+        }
+      },
+      title: {
+        show: true,
+        text: 'Average points',
+        textStyle: {
+          color: '#fff'
+        },
+        textAlign: 'center',
+        left: '50%',
+        top: '8%'
+      },
+      tooltip: {
+        extraCssText: 'max-width: 200px;white-space: pre-wrap; line-height: 1.5',
+        confine: true,
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      dataset: {
+        source: []
+      },
+      xAxis: [
+        {
+          type: 'category',
+          axisTick: {
+            alignWithLabel: false
+          },
+          axisLabel: {
+            show: false,
+            hideOverlap: false
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: []
+    };
+
+    let averageScore = 0;
+    data.forEach(i => {
+      let points = i.common?.points + i.train?.points + i.learn?.points;
+      averageScore = (points + averageScore) / 2;
+    });
+
+    // // @ts-ignore
+    // pointsOption?.series[0].data.push(averageScore);
+
+    let dataSet = [['name', 'Others']];
+    let thisSeries = [];
+    thisSeries.push({
+      type: 'bar', label: {
+        show: true,
+        position: 'inside'
+      }
+    });
+
+    // @ts-ignore
+    dataSet.push(['Points', averageScore]);
+
+
+    if (this.compareSelf) {
+      let myId = this.userService.docId;
+      let i = data.find(e => e.id === myId);
+      if (i) {
+        let myScore = i.common?.points + i.train?.points + i.learn?.points;
+        dataSet[0].push('You');
+        dataSet[1].push(String(Number(myScore)));
+        thisSeries.push({
+          type: 'bar', label: {
+            show: true,
+            position: 'inside'
+          }
+        });
+      }
     }
 
     // @ts-ignore
-    otherOption.title.text = myTitle
+    pointsOption.series = thisSeries;
+    // @ts-ignore
+    pointsOption.dataset.source = dataSet;
+
+    this.options = pointsOption;
+
+    console.warn('this.options', this.options);
+  }
+
+  createOtherChart(data: Item[]) {
+    let otherOption: EChartsOption = {
+      legend: {
+        padding: [5, 0, 0, 0],
+        textStyle: {
+          color: '#fff'
+        }
+      },
+      title: {
+        show: true,
+        text: 'Average points',
+        textStyle: {
+          color: '#fff'
+        },
+        textAlign: 'center',
+        left: '50%',
+        top: '8%'
+      },
+      tooltip: {
+        extraCssText: 'max-width: 200px;white-space: pre-wrap; line-height: 1.5',
+        confine: true,
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      dataset: {
+        source: []
+      },
+      xAxis: [
+        {
+          type: 'category',
+          axisTick: {
+            alignWithLabel: false
+          },
+          axisLabel: {
+            show: false,
+            hideOverlap: false
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: []
+    };
+
+    let myTitle = '';
+
+    if (this.type === 'mindmap') {
+      myTitle = 'Mindmap';
+    } else if (this.type === 'squares') {
+      myTitle = 'Public Challange method';
+    } else if (this.type === 'function') {
+      myTitle = 'Challange method';
+    }
+
+    // @ts-ignore
+    otherOption.title.text = myTitle;
 
     let questions: {} = {};
     let scores: {} = {};
@@ -215,7 +342,7 @@ export class ChartComponent implements OnInit {
     });
 
 
-    let dataSet = [['question','Others']];
+    let dataSet = [['question', 'Others']];
     let thisSeries = [];
 
     for (let i = 1; i <= Object.keys(questions).length; i++) {
@@ -226,8 +353,12 @@ export class ChartComponent implements OnInit {
       arr.push(scores[i]);
       dataSet.push(arr);
     }
-    thisSeries.push({type: 'bar'});
-
+    thisSeries.push({
+      type: 'bar', label: {
+        show: true,
+        position: 'inside'
+      }
+    });
 
 
     if (this.compareSelf) {
@@ -235,7 +366,12 @@ export class ChartComponent implements OnInit {
       let i = data.find(e => e.id === myId);
       if (i) {
         dataSet[0].push('You');
-        thisSeries.push({type: 'bar'});
+        thisSeries.push({
+          type: 'bar', label: {
+            show: true,
+            position: 'inside'
+          }
+        });
 
 
         let myScore: {} = {};
