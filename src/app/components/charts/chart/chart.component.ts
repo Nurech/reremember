@@ -105,9 +105,6 @@ export class ChartComponent implements OnInit {
       }
     });
 
-    console.warn('started', started)
-    console.warn('ended', ended)
-
     let dataSet = [['title','Started', 'Finished']];
     let thisSeries = [];
     thisSeries.push({
@@ -133,7 +130,6 @@ export class ChartComponent implements OnInit {
 
     this.options = learnOption;
 
-    console.warn('this.options', this.options);
   }
 
   createPointsChart(data: Item[]) {
@@ -236,7 +232,6 @@ export class ChartComponent implements OnInit {
 
     this.options = pointsOption;
 
-    console.warn('this.options', this.options);
   }
 
   createOtherChart(data: Item[]) {
@@ -408,7 +403,6 @@ export class ChartComponent implements OnInit {
     otherOption.dataset.source = dataSet;
 
     this.options = otherOption;
-    console.warn(' this.options', this.options);
   }
 
   ngOnDestroy(): void {
