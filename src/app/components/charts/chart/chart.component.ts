@@ -294,7 +294,7 @@ export class ChartComponent implements OnInit {
     let myTitle = '';
 
     if (this.type === 'mindmap') {
-      myTitle = 'Mindmap';
+      myTitle = 'Mindmap method';
     } else if (this.type === 'squares') {
       myTitle = 'Public Challange method';
     } else if (this.type === 'function') {
