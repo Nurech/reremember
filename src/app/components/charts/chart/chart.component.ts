@@ -98,21 +98,21 @@ export class ChartComponent implements OnInit {
     let ended = 0;
     data.forEach(i => {
       if (i.learn.readPages?.length > 0) {
-        started += 1
+        started += 1;
       }
       if (i.learn.isDone && i.train.isDone) {
-        ended += 1
+        ended += 1;
       }
     });
 
-    let dataSet = [['title','Started', 'Finished']];
+    let dataSet = [['title', 'Started', 'Finished']];
     let thisSeries = [];
     thisSeries.push({
       type: 'bar', label: {
         show: true,
         position: 'inside'
       }
-    },{
+    }, {
       type: 'bar', label: {
         show: true,
         position: 'inside'
@@ -190,7 +190,9 @@ export class ChartComponent implements OnInit {
     let averageScore = 0;
     data.forEach(i => {
       let points = i.common?.points + i.train?.points + i.learn?.points;
-      averageScore = (points + averageScore) / 2;
+      if (points > 0) {
+        averageScore = (points + averageScore) / 2;
+      }
     });
 
     // // @ts-ignore
@@ -206,7 +208,7 @@ export class ChartComponent implements OnInit {
     });
 
     // @ts-ignore
-    dataSet.push(['Points', round(averageScore,1)]);
+    dataSet.push(['Points', round(averageScore, 1)]);
 
 
     if (this.compareSelf) {
@@ -215,7 +217,7 @@ export class ChartComponent implements OnInit {
       if (i) {
         let myScore = i.common?.points + i.train?.points + i.learn?.points;
         dataSet[0].push('You');
-        dataSet[1].push(String(round(Number(myScore),1)));
+        dataSet[1].push(String(round(Number(myScore), 1)));
         thisSeries.push({
           type: 'bar', label: {
             show: true,
@@ -321,13 +323,15 @@ export class ChartComponent implements OnInit {
             if (k.endsWith('Score')) {
               let index = Number(k.replace(this.type + 'Q', '').replace('Score', ''));
               // @ts-ignore
-              // @ts-ignore
-              if (scores[index] === undefined) {
+              if (Number(v) > 0) {
                 // @ts-ignore
-                scores[index] = round(Number(v),1);
-              } else {
-                // @ts-ignore
-                scores[index] = round(((Number(scores[index]) + (Number(v))) / 2),1);
+                if (scores[index] === undefined) {
+                  // @ts-ignore
+                  scores[index] = round(Number(v), 1);
+                } else {
+                  // @ts-ignore
+                  scores[index] = round(((Number(scores[index]) + (Number(v))) / 2), 1);
+                }
               }
             }
 
@@ -377,14 +381,18 @@ export class ChartComponent implements OnInit {
             if (k.endsWith('Score')) {
               let index = Number(k.replace(this.type + 'Q', '').replace('Score', ''));
 
-              // @ts-ignore
-              if (myScore[index] === undefined) {
+              if (Number(v) > 0) {
+
                 // @ts-ignore
-                myScore[index] = round(Number(v),1);
-              } else {
-                // @ts-ignore
-                myScore[index] = round(((Number(myScore[index]) + (Number(v))) / 2),1);
+                if (myScore[index] === undefined) {
+                  // @ts-ignore
+                  myScore[index] = round(Number(v), 1);
+                } else {
+                  // @ts-ignore
+                  myScore[index] = round(((Number(myScore[index]) + (Number(v))) / 2), 1);
+                }
               }
+
             }
           }
         }

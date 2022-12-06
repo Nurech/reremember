@@ -75,7 +75,7 @@ export class UserService {
     this.localforageService.set('userData43251351534', this.docId);
   }
 
-  @debounce(1000)
+  @debounce(5000)
   update() {
     console.warn('this.userItem', this.userItem);
     this.dataService.updateDoc(this.docRef, this.userItem).then(r => console.log('update ok'));
