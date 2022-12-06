@@ -49,6 +49,7 @@ export class UserService {
     this.docRef = await this.dataService.getDocRef(id);
     return this.dataService.getDoc(this.docRef).then(item => {
       this.userDocSnap = item;
+      console.warn(item.data())
       this.userItem = item.data() as Item;
       console.warn('item from db: ', item);
     });
@@ -56,6 +57,7 @@ export class UserService {
 
   createItem() {
     console.warn('creating new user');
+    Object.assign( this.userItem, {name: ''})
     this.userItem.name = this.generateUserName();
     this.initUserItem();
     this.dataService.addDoc(this.userItem).then((item) => {
