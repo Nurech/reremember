@@ -157,7 +157,7 @@ require learning, memorization of a secret key, and execution when logging in to
     items: [
       {
         type: 'special',
-        data: `2. PUBLIC CHALLENGE METHOD`
+        data: `2. PICTURE CHALLENGE METHOD`
       },
       {
         type: 'regular',
@@ -254,7 +254,7 @@ C = (I0, . . . , I13) would correspond to an ordered subset of those images.`
     items: [
       {
         type: 'special',
-        data: `3. SECURE PASSWORD CREATION SCHEMA METHOD`
+        data: `3. LETTER-TO-WORD MAPPING METHOD`
       },
       {
         type: 'regular',
