@@ -200,6 +200,9 @@ export class ChartComponent implements OnInit {
     let thisSeries = [];
     thisSeries.push({
       type: 'bar', label: {
+        formatter: (params: any) => {
+          return `${params.data[1].toFixed(1)}`
+        },
         show: true,
         position: 'inside'
       }
@@ -218,6 +221,9 @@ export class ChartComponent implements OnInit {
         dataSet[1].push(String(Number(myScore)));
         thisSeries.push({
           type: 'bar', label: {
+            formatter: (params: any) => {
+              return `${params.data[1].toFixed(1)}`
+            },
             show: true,
             position: 'inside'
           }
@@ -350,6 +356,9 @@ export class ChartComponent implements OnInit {
     }
     thisSeries.push({
       type: 'bar', label: {
+        formatter: (params: any) => {
+          return `${params.data[1].toFixed(1)}`
+        },
         show: true,
         position: 'inside'
       }
@@ -363,6 +372,9 @@ export class ChartComponent implements OnInit {
         dataSet[0].push('You');
         thisSeries.push({
           type: 'bar', label: {
+            formatter: (params: any) => {
+              return `${params.data[1].toFixed(1)}`
+            },
             show: true,
             position: 'inside'
           }
