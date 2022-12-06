@@ -420,8 +420,8 @@ export class ChartComponent implements OnInit {
 
   initOpts = {
     renderer: 'svg',
-    width: 300,
-    height: 300
+    width: 250,
+    height: 250
   };
 
   options: EChartsOption = {};
