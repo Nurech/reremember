@@ -102,7 +102,7 @@ boxes 1-5 show the password generation step by step.`
     items: [
       {
         type: 'special',
-        data: `2. PUBLIC CHALLENGE METHOD`
+        data: `2. PICTURE CHALLENGE METHOD`
       },
       {
         type: 'regular',
@@ -138,7 +138,7 @@ reconstructs each of his passwords by computing the response to a public challen
     items: [
       {
         type: 'special',
-        data: `3. SECURE PASSWORD CREATION SCHEMA METHOD`
+        data: `3. LETTER-TO-WORD MAPPING METHOD`
       }, {
         type: 'regular',
         data: `Memorize a letter-to-word map - pick and remember a word for each letter from A to Z.`
@@ -193,10 +193,10 @@ reconstructs each of his passwords by computing the response to a public challen
       },
       {
         type: 'special',
-        data: `2. PUBLIC CHALLENGE METHOD`
+        data: `2. PICTURE CHALLENGE METHOD`
       }, {
         type: 'special',
-        data: `3. SECURE PASSWORD CREATION SCHEMA METHOD`
+        data: `3. LETTER-TO-WORD MAPPING METHOD`
       }
     ]
   }
