@@ -2,29 +2,24 @@
 
   <ng-container *ngIf="userService.isResultsOpen(); else Nope">
 
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row d-flex justify-center align-items-center">
+      <div class="col-auto">
         <app-chart [type]="'points'" [compareSelf]="false"></app-chart>
       </div>
-      <div class="col-sm-6">
+      <div class="col-auto">
         <app-chart [type]="'mindmap'" [compareSelf]="false"></app-chart>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
+      <div class="col-auto">
         <app-chart [type]="'squares'" [compareSelf]="false"></app-chart>
       </div>
-      <div class="col-sm-6">
+      <div class="col-auto">
         <app-chart [type]="'function'" [compareSelf]="false"></app-chart>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
+      <div class="col-auto">
         <app-chart [type]="'learning'" [compareSelf]="false"></app-chart>
       </div>
     </div>
+
 
   </ng-container>
 
