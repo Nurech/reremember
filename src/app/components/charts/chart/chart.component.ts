@@ -200,16 +200,13 @@ export class ChartComponent implements OnInit {
     let thisSeries = [];
     thisSeries.push({
       type: 'bar', label: {
-        formatter: (params: any) => {
-          return `${params.data[1].toFixed(1)}`
-        },
         show: true,
         position: 'inside'
       }
     });
 
     // @ts-ignore
-    dataSet.push(['Points', averageScore]);
+    dataSet.push(['Points', round(averageScore,1)]);
 
 
     if (this.compareSelf) {
@@ -218,12 +215,9 @@ export class ChartComponent implements OnInit {
       if (i) {
         let myScore = i.common?.points + i.train?.points + i.learn?.points;
         dataSet[0].push('You');
-        dataSet[1].push(String(Number(myScore)));
+        dataSet[1].push(String(round(Number(myScore),1)));
         thisSeries.push({
           type: 'bar', label: {
-            formatter: (params: any) => {
-              return `${params.data[1].toFixed(1)}`
-            },
             show: true,
             position: 'inside'
           }
@@ -330,10 +324,10 @@ export class ChartComponent implements OnInit {
               // @ts-ignore
               if (scores[index] === undefined) {
                 // @ts-ignore
-                scores[index] = Number(v);
+                scores[index] = round(Number(v),1);
               } else {
                 // @ts-ignore
-                scores[index] = (Number(scores[index]) + (Number(v))) / 2;
+                scores[index] = round(((Number(scores[index]) + (Number(v))) / 2),1);
               }
             }
 
@@ -356,9 +350,6 @@ export class ChartComponent implements OnInit {
     }
     thisSeries.push({
       type: 'bar', label: {
-        formatter: (params: any) => {
-          return `${params.data[1].toFixed(1)}`
-        },
         show: true,
         position: 'inside'
       }
@@ -372,9 +363,6 @@ export class ChartComponent implements OnInit {
         dataSet[0].push('You');
         thisSeries.push({
           type: 'bar', label: {
-            formatter: (params: any) => {
-              return `${params.data[1].toFixed(1)}`
-            },
             show: true,
             position: 'inside'
           }
@@ -392,10 +380,10 @@ export class ChartComponent implements OnInit {
               // @ts-ignore
               if (myScore[index] === undefined) {
                 // @ts-ignore
-                myScore[index] = Number(v);
+                myScore[index] = round(Number(v),1);
               } else {
                 // @ts-ignore
-                myScore[index] = (Number(myScore[index]) + (Number(v))) / 2;
+                myScore[index] = round(((Number(myScore[index]) + (Number(v))) / 2),1);
               }
             }
           }
@@ -442,4 +430,9 @@ export class ChartComponent implements OnInit {
       this.echartsInstance.resize();
     }
   }
+}
+
+function round(value: number, precision: any) {
+  const multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
 }
