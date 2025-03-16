@@ -177,7 +177,7 @@ reconstructs each of his passwords by computing the response to a public challen
       },
       {
         type: 'regular',
-        data: `For example: "F3$", which would make the end result for our amazon password: "rdngrdrlrnrwF3$"`
+        data: `For example: "F3$", which would make the end result for our amazon password`
       }
     ]
   },
